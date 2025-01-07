@@ -15,8 +15,11 @@ export default function Home() {
     defaultValues: {
       template: "1",
       driverName: "",
+      driverSalutation: "Mr.",
       vehicleNumber: "",
+      employeeSalutation: "Mr.",
       employeeName: "",
+      currency: "₹__68",
       salaryAmount: 0,
       signatureImage: "",
       signatureImageSrc: "",

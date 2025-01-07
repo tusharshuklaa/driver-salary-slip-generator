@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, FormEvent } from "react";
+import { FC, FormEvent, useState } from "react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
@@ -43,6 +43,11 @@ const MONTHS = [
 ];
 
 export const DetailsForm: FC<ReactHookFormValue> = ({ form }) => {
+    const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
+    const allCurrencies = Currencies.map((currency: Currency, index: number) => ({
+        ...currency,
+        value: `${currency.value}__${index}`,
+    }));
     const onSubmit = (e: FormEvent) => {
         e.preventDefault();
         return;
@@ -163,7 +168,7 @@ export const DetailsForm: FC<ReactHookFormValue> = ({ form }) => {
                             render={({ field }) => (
                                 <FormItem className="flex flex-col w-full">
                                     <FormLabel>Payment Date</FormLabel>
-                                    <Popover>
+                                    <Popover open={isDatePickerOpen} onOpenChange={setIsDatePickerOpen}>
                                         <PopoverTrigger asChild>
                                             <FormControl>
                                                 <Button
@@ -191,6 +196,7 @@ export const DetailsForm: FC<ReactHookFormValue> = ({ form }) => {
                                                     date < new Date("1900-01-01")
                                                 }
                                                 initialFocus
+                                                onDayClick={ () => setIsDatePickerOpen(false) }
                                             />
                                         </PopoverContent>
                                     </Popover>
@@ -213,11 +219,10 @@ export const DetailsForm: FC<ReactHookFormValue> = ({ form }) => {
                                         </FormControl>
                                         <SelectContent>
                                             {
-                                                Currencies.map((currency: Currency, index) => {
-                                                    const key = `${currency.value}__${index}`;
+                                                allCurrencies.map(({ text, value }: Currency) => {
                                                     return (
-                                                        <SelectItem key={key} value={key} aria-label={currency.text}>
-                                                            {currency.text}
+                                                        <SelectItem key={value} value={value} aria-label={text}>
+                                                            {text}
                                                         </SelectItem>
                                                     )
                                                 })

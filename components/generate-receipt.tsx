@@ -32,7 +32,11 @@ export const GenerateReceipt: FC<ReactHookFormValue> = ({ form }) => {
             <section className="w-full print:hidden">
                 <DetailsForm form={form} />
 
-                <div className="flex mt-8 justify-center">
+                <div className="flex mt-8 justify-center gap-8">
+                    <Button variant="destructive" onClick={() => form.reset()}>
+                        Reset Form
+                    </Button>
+
                     <Button onClick={() => window.print()}>
                         Print PDF
                     </Button>

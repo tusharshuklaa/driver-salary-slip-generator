@@ -1,5 +1,7 @@
-import Image from "next/image";
 import { FC } from "react";
+import Image from "next/image";
+import { TemplateProps } from "@/types/globals";
+import { useTemplateValues } from "@/hooks/use-template-values";
 
 export const Template1: FC<TemplateProps> = ({
     heading = "Driver Salary Receipt",
@@ -9,40 +11,36 @@ export const Template1: FC<TemplateProps> = ({
     driverName = "",
     salaryMonth = "January",
     employeeSalutation = "Mr.",
-    employeeName = "Employee",
+    employeeName = "",
     paymentDate = new Date(),
     vehicleNumber = "",
     signatureImageSrc = "",
+    font,
 }) => {
-    const payDate = new Intl.DateTimeFormat('en-GB', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric'
-    }).format(paymentDate);
-    const currencySymbol = currency.split("__")[0];
+    const { payDate, currencySymbol, signatureImage } = useTemplateValues(paymentDate, currency, signatureImageSrc, driverName, font);
 
     return (
-        <div className="divide-y-2 divide-black">
+        <div className="divide-y-2 divide-black print:p-4">
             <div>
-                <h2 className="text-center text-lg font-bold">{heading}</h2>
-                <p className="mt-4">
-                    This is to certify that I have paid <strong>{currencySymbol} {salaryAmount}</strong> to driver, {driverSalutation} <strong>{driverName}</strong> for the month of <strong>{salaryMonth}</strong> (Acknowledged receipt enclosed).
+                <h2 className="text-center text-lg print:text-xl font-bold">{heading}</h2>
+                <p className="mt-4 print:mt-8">
+                    This is to certify that I have paid <strong>{currencySymbol} {salaryAmount}</strong> to driver, <strong className="capitalize"></strong>{driverSalutation} <strong className="capitalize">{driverName}</strong> for the month of <strong className="capitalize">{salaryMonth}</strong> (Acknowledged receipt enclosed).
                     I also declare that the driver is exclusively utilized for official purpose only. Please reimburse the above amount. I further declare that what is stated above is correct and true.
                 </p>
 
                 <div className="mt-6">
                     <strong>Employee Name: </strong>
-                    <span>{employeeName}</span>
+                    <span className="capitalize">{employeeName}</span>
                 </div>
 
-                <div className="mt-4 mb-6">
+                <div className="mt-4 mb-6 print:mb-12">
                     <strong>Date: </strong>
-                    <span>{payDate}</span>
+                    <span className="capitalize">{payDate}</span>
                 </div>
             </div>
 
             <div>
-                <h2 className="text-center text-lg font-bold mt-4">Receipt Acknowledgement</h2>
+                <h2 className="text-center text-lg print:text-xl font-bold mt-4 print:mt-12">Receipt Acknowledgement</h2>
 
                 <div className="mt-4">
                     <strong>Date of Receipt: </strong>
@@ -51,35 +49,35 @@ export const Template1: FC<TemplateProps> = ({
 
                 <div className="mt-4">
                     <strong>For the Month of: </strong>
-                    <span>{salaryMonth}</span>
+                    <span className="capitalize">{salaryMonth}</span>
                 </div>
 
                 <div className="mt-4">
                     <strong>Name of Driver: </strong>
-                    <span>{driverSalutation} {driverName}</span>
+                    <span className="capitalize">{driverSalutation} {driverName}</span>
                 </div>
 
                 <div className="mt-4">
                     <strong>Vehicle No: </strong>
-                    <span>{vehicleNumber}</span>
+                    <span className="uppercase">{vehicleNumber}</span>
                 </div>
 
-                <div className="mt-6">
-                    Received a sum of <strong>{currencySymbol}{salaryAmount}</strong> only for the month of <strong>{salaryMonth}</strong> from <strong>{employeeSalutation} {employeeName}</strong>.
+                <div className="mt-6 print:mt-10">
+                    Received a sum of <strong>{currencySymbol}{salaryAmount}</strong> only for the month of <strong className="capitalize">{salaryMonth}</strong> from <strong>{employeeSalutation}</strong> <strong className="capitalize">{employeeName}</strong>.
                 </div>
 
-                <div className="mt-6 flex justify-between items-start">
+                <div className="mt-6 print:mt-16 flex justify-between items-start">
                     <div className="w-full flex flex-col items-center gap-1">
                         <strong>Revenue Stamp</strong>
-                        <Image src="/revenue.jpg" alt="Revenue Stamp" width={60} height={70} />
+                        <Image src="/revenue.jpg" alt="Revenue Stamp" width={60} height={70} className="w-auto h-auto" />
                     </div>
 
                     <div className="w-full flex flex-col items-center gap-1">
                         {
-                            signatureImageSrc && (
+                            signatureImage && (
                                 <>
                                     <strong>Signature</strong>
-                                    <Image src={signatureImageSrc} alt="driver signature" width={60} height={70} />
+                                    <Image src={signatureImage} alt="driver signature" width={60} height={70} className="w-auto h-auto max-h-[100px]" />
                                 </>
                             )
                         }

@@ -1,11 +1,18 @@
 'use client';
 
 import React, { FC } from 'react';
+import { Alex_Brush } from 'next/font/google';
+import Link from 'next/link';
+import { ReactHookFormValue } from '@/types/globals';
 import { Template1 } from '@/components/template1';
 import { DetailsForm } from '@/components/details-form';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
-import { Button } from './ui/button';
-import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+
+const signatureFont = Alex_Brush({
+    weight: '400',
+    subsets: ['latin'],
+});
 
 export const GenerateReceipt: FC<ReactHookFormValue> = ({ form }) => {
     const formValues = form.watch();
@@ -20,7 +27,7 @@ export const GenerateReceipt: FC<ReactHookFormValue> = ({ form }) => {
     }
 
     return (
-        <div className="flex gap-8 overflow-hidden max-h-[80vh] pt-4">
+        <div className="flex flex-col lg:flex-row gap-8 overflow-hidden min-h-max lg:max-h-[80vh] pt-4">
             <section className="w-full print:hidden">
                 <DetailsForm form={form} />
 
@@ -35,12 +42,14 @@ export const GenerateReceipt: FC<ReactHookFormValue> = ({ form }) => {
                 </p>
             </section>
 
-            {/* aspect ration of an A4 size sheet */}
-            <AspectRatio ratio={1 / 1.4142}>
-                <section className="border-2 border-black bg-white p-12 w-full text-black print:border-0 print:p-0">
-                    <TemplateComp {...formValues} />
-                </section>
-            </AspectRatio>
+            <div className="w-full">
+                {/* aspect ration of an A4 size sheet */}
+                <AspectRatio ratio={1 / 1.4142}>
+                    <section className="border-2 border-black bg-white p-12 w-full text-black print:border-0 print:p-0">
+                        <TemplateComp {...formValues} font={signatureFont} />
+                    </section>
+                </AspectRatio>
+            </div>
         </div>
     );
 };

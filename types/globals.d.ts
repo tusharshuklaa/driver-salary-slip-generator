@@ -1,8 +1,10 @@
-declare type ReactHookFormValue = {
+import { NextFont } from "next/dist/compiled/@next/font";
+
+export type ReactHookFormValue = {
     form: UseFormReturn<z.infer<typeof formSchema>>;
 };
 
-declare type TemplateProps = {
+export type TemplateProps = {
     heading?: string;
     salaryAmount?: number;
     currency?: string;
@@ -13,5 +15,7 @@ declare type TemplateProps = {
     employeeName?: string;
     paymentDate?: Date;
     vehicleNumber?: string;
+    signatureImage?: string;
     signatureImageSrc?: string;
+    font: NextFont;
 };

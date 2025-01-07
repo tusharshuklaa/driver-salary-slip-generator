@@ -2,10 +2,11 @@ import { FC } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form } from "@/components/ui/form";
 import { FormContainer } from "@/components/form-container";
+import { ReactHookFormValue } from "@/types/globals";
 
 export const SelectTemplate: FC<ReactHookFormValue> = ({ form }) => {
     return (
-        <FormContainer heading="Templates">
+        <FormContainer heading="Templates" className="print:hidden">
             <Form {...form}>
                 <FormField
                     control={form.control}

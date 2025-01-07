@@ -26,7 +26,7 @@ export default function Home() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <main className="max-w-7xl mx-auto py-12 px-4 space-y-8">
+    <main className="max-w-7xl mx-auto py-12 px-4 space-y-8 print:space-y-0 print:py-0 print:px-0">
       <h1 className="text-center text-3xl mb-8 print:hidden">Driver Salary Slip Generator</h1>
 
       <SelectTemplate form={form} />

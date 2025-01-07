@@ -42,7 +42,7 @@ export const Template1: FC<TemplateProps> = ({
             <div>
                 <h2 className="text-center text-lg print:text-xl font-bold mt-4 print:mt-12">Receipt Acknowledgement</h2>
 
-                <div className="mt-4">
+                <div className="mt-4 print:mt-8">
                     <strong>Date of Receipt: </strong>
                     <span>{payDate}</span>
                 </div>
@@ -62,9 +62,9 @@ export const Template1: FC<TemplateProps> = ({
                     <span className="uppercase">{vehicleNumber}</span>
                 </div>
 
-                <div className="mt-6 print:mt-10">
+                <p className="mt-6 print:mt-10">
                     Received a sum of <strong>{currencySymbol}{salaryAmount}</strong> only for the month of <strong className="capitalize">{salaryMonth}</strong> from <strong>{employeeSalutation}</strong> <strong className="capitalize">{employeeName}</strong>.
-                </div>
+                </p>
 
                 <div className="mt-6 print:mt-16 flex justify-between items-start">
                     <div className="w-full flex flex-col items-center gap-1">

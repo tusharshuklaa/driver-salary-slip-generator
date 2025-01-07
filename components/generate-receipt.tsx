@@ -5,6 +5,7 @@ import { Alex_Brush } from 'next/font/google';
 import Link from 'next/link';
 import { ReactHookFormValue } from '@/types/globals';
 import { Template1 } from '@/components/template1';
+import { Template2 } from '@/components/template2';
 import { DetailsForm } from '@/components/details-form';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Button } from '@/components/ui/button';
@@ -21,7 +22,7 @@ export const GenerateReceipt: FC<ReactHookFormValue> = ({ form }) => {
     let TemplateComp = Template1;
 
     if (template === "2") {
-        TemplateComp = Template1;
+        TemplateComp = Template2;
     } else if (template === "3") {
         TemplateComp = Template1;
     }

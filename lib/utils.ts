@@ -30,6 +30,7 @@ export const formSchema = z.object({
   }).min(3).max(9),
   signatureImage: z.string().url(),
   signatureImageSrc: z.string().url(),
+  disclaimer: z.string(),
 });
 
 export const getSignatureImageUrl = (nameStr: string, font: NextFont, textColor = '#2c2c2c') => {

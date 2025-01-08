@@ -15,6 +15,7 @@ export const Template1: FC<TemplateProps> = ({
     paymentDate = new Date(),
     vehicleNumber = "",
     signatureImageSrc = "",
+    disclaimer,
     font,
 }) => {
     const { payDate, currencySymbol, signatureImage } = useTemplateValues(paymentDate, currency, signatureImageSrc, driverName, font);
@@ -25,7 +26,7 @@ export const Template1: FC<TemplateProps> = ({
                 <h2 className="text-center text-lg print:text-xl font-bold">{heading}</h2>
                 <p className="mt-4 print:mt-8">
                     This is to certify that I have paid <strong>{currencySymbol} {salaryAmount}</strong> to driver, <strong className="capitalize"></strong>{driverSalutation} <strong className="capitalize">{driverName}</strong> for the month of <strong className="capitalize">{salaryMonth}</strong> (Acknowledged receipt enclosed).
-                    I also declare that the driver is exclusively utilized for official purpose only. Please reimburse the above amount. I further declare that what is stated above is correct and true.
+                    {disclaimer}
                 </p>
 
                 <div className="mt-6">

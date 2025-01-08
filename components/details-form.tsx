@@ -7,6 +7,7 @@ import { CalendarIcon } from "lucide-react";
 import {
     Form,
     FormControl,
+    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -62,6 +63,8 @@ export const DetailsForm: FC<ReactHookFormValue> = ({ form }) => {
             form.setValue('signatureImageSrc', imageUrl);
         }
     };
+
+    const defaultSalaryMonth = format(new Date(), "MMMM");
 
     return (
         <Form {...form}>
@@ -256,7 +259,7 @@ export const DetailsForm: FC<ReactHookFormValue> = ({ form }) => {
                             render={({ field }) => (
                                 <FormItem className="w-full">
                                     <FormLabel>Salary Month</FormLabel>
-                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <Select onValueChange={field.onChange} defaultValue={defaultSalaryMonth}>
                                         <FormControl>
                                             <SelectTrigger>
                                                 <SelectValue placeholder="Month" />
@@ -302,6 +305,27 @@ export const DetailsForm: FC<ReactHookFormValue> = ({ form }) => {
                             </FormItem>
                         )}
                     />
+                </FormContainer>
+
+                <FormContainer heading="Driver Details">
+                    <FormRow>
+                        <FormField
+                            control={form.control}
+                            name="disclaimer"
+                            render={({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormLabel>Disclaimer</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="I declare that..." {...field} />
+                                    </FormControl>
+                                    <FormDescription>
+                                        Optional
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </FormRow>
                 </FormContainer>
             </form>
         </Form>

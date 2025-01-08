@@ -17,5 +17,6 @@ export type TemplateProps = {
     vehicleNumber?: string;
     signatureImage?: string;
     signatureImageSrc?: string;
+    disclaimer?: string;
     font: NextFont;
 };

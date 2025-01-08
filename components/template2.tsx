@@ -15,6 +15,7 @@ export const Template2: FC<TemplateProps> = ({
     paymentDate = new Date(),
     vehicleNumber = "",
     signatureImageSrc = "",
+    disclaimer,
     font,
 }) => {
     const { payDate, currencySymbol, signatureImage } = useTemplateValues(paymentDate, currency, signatureImageSrc, driverName, font);
@@ -45,7 +46,8 @@ export const Template2: FC<TemplateProps> = ({
                 </div>
 
                 <p className="mt-4">
-                    Received from <span className="capitalize">{employeeSalutation} {employeeName}</span> <strong>{currencySymbol}{salaryAmount}</strong> to driver <span className="capitalize">{driverSalutation} {driverName}</span> towards salary of the month of <strong className="capitalize">{salaryMonth}</strong>
+                    Received from <span className="capitalize">{employeeSalutation} {employeeName}</span> <strong>{currencySymbol}{salaryAmount}</strong> to driver <span className="capitalize">{driverSalutation} {driverName}</span> towards salary of the month of <strong className="capitalize">{salaryMonth}</strong>.&nbsp;
+                    {disclaimer}
                 </p>
 
                 <div className="flex justify-end gap-2 mt-6 print:mt-12">

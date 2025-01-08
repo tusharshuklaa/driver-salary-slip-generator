@@ -37,6 +37,9 @@ export default function Home() {
       <GenerateReceipt form={form} />
 
       <footer className="text-center text-sm text-gray-500 print:hidden border-t border-gray-200 py-4">
+        <p className="mb-8">
+          See an issue in the app? <Button variant={'link'} className="tracking-wide px-1" asChild><Link href="https://github.com/tusharshuklaa/driver-salary-slip-generator/issues/new?assignees=tusharshuklaa&labels=bug&projects=&template=bug_report.md&title=">Let me know!</Link></Button> Have a feature request? Feel free to <Button variant={'link'} className="tracking-wide px-1" asChild><Link href="https://github.com/tusharshuklaa/driver-salary-slip-generator/issues/new?assignees=tusharshuklaa&labels=enhancement&projects=&template=feature_request.md&title=">suggest</Link></Button>.
+        </p>
         <p>Created by <Button variant={'link'} className="tracking-wide px-1" asChild><Link href="https://github.com/tusharshuklaa">Tushar Shukla</Link></Button></p>
         <p className="mb-4"><a href="https://www.flaticon.com/free-icons/receipt" title="receipt icons">Receipt icon created by Freepik - Flaticon</a></p>
         <p>&copy; {currentYear} All Rights Reserved</p>

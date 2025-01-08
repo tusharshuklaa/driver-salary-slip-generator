@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://driver-salary-slip-generator.vercel.app/
+
+# Sitemaps
+Sitemap: https://driver-salary-slip-generator.vercel.app/sitemap.xml

@@ -24,6 +24,7 @@ export default function Home() {
       signatureImage: "",
       signatureImageSrc: "",
       disclaimer: "I also declare that the driver is exclusively utilized for official purpose only. Please reimburse the above amount. I further declare that what is stated above is correct and true.",
+      needRevenueStamp: true,
     },
   });
 

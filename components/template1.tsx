@@ -17,6 +17,7 @@ export const Template1: FC<TemplateProps> = ({
     signatureImageSrc = "",
     disclaimer,
     font,
+    needRevenueStamp,
 }) => {
     const { payDate, currencySymbol, signatureImage } = useTemplateValues(paymentDate, currency, signatureImageSrc, driverName, font);
 
@@ -69,8 +70,14 @@ export const Template1: FC<TemplateProps> = ({
 
                 <div className="mt-6 print:mt-16 flex justify-between items-start">
                     <div className="w-full flex flex-col items-center gap-1">
-                        <strong>Revenue Stamp</strong>
-                        <Image src="/revenue.jpg" alt="Revenue Stamp" width={60} height={70} className="w-auto h-auto" />
+                        {
+                            needRevenueStamp && (
+                                <>
+                                    <strong>Revenue Stamp</strong>
+                                    <Image src="/revenue.jpg" alt="Revenue Stamp" width={60} height={70} className="h-auto max-h-[100px] ml-4" />
+                                </>
+                            )
+                        }
                     </div>
 
                     <div className="w-full flex flex-col items-center gap-1">

@@ -19,4 +19,5 @@ export type TemplateProps = {
     signatureImageSrc?: string;
     disclaimer?: string;
     font: NextFont;
+    needRevenueStamp: boolean;
 };

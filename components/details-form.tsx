@@ -22,6 +22,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { FormRow } from "@/components/form-row";
 import { FormContainer } from "@/components/form-container";
 import Currencies from "@/data/currency.json";
+import { Checkbox } from "@/components/ui/checkbox";
 
 type Currency = {
     text: string;
@@ -282,32 +283,53 @@ export const DetailsForm: FC<ReactHookFormValue> = ({ form }) => {
                     </FormRow>
                 </FormContainer>
 
-                <FormContainer heading="Signature">
-                    <FormField
-                        control={form.control}
-                        name="signatureImage"
-                        render={({ field }) => (
-                            <FormItem className="w-full">
-                                <FormLabel>Signature</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type="file"
-                                        accept="image/*"
-                                        placeholder="Choose a file..."
-                                        {...field}
-                                        onChange={(e) => {
-                                            field.onChange(e);
-                                            handleImageChange(e);
-                                        }}
+                <FormContainer heading="Images">
+                    <FormRow className="mt-2">
+                        <FormField
+                            control={form.control}
+                            name="needRevenueStamp"
+                            render={({ field }) => (
+                                <FormItem className="w-full flex items-center gap-4">
+                                    <FormLabel>Need Revenue Stamp?</FormLabel>
+                                    <FormControl>
+                                    <Checkbox
+                                        className="!mt-0"
+                                        checked={field.value}
+                                        onCheckedChange={field.onChange}
                                     />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                                    </FormControl>
+                                </FormItem>
+                            )}
+                        />
+                    </FormRow>
+
+                    <FormRow>
+                        <FormField
+                            control={form.control}
+                            name="signatureImage"
+                            render={({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormLabel>Signature</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            type="file"
+                                            accept="image/*"
+                                            placeholder="Choose a file..."
+                                            {...field}
+                                            onChange={(e) => {
+                                                field.onChange(e);
+                                                handleImageChange(e);
+                                            }}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </FormRow>
                 </FormContainer>
 
-                <FormContainer heading="Driver Details">
+                <FormContainer heading="Additional Info">
                     <FormRow>
                         <FormField
                             control={form.control}

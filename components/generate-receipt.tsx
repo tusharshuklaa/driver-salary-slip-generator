@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ReactHookFormValue } from '@/types/globals';
 import { Template1 } from '@/components/template1';
 import { Template2 } from '@/components/template2';
+import { Template3 } from '@/components/template3';
 import { DetailsForm } from '@/components/details-form';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Button } from '@/components/ui/button';
@@ -24,7 +25,7 @@ export const GenerateReceipt: FC<ReactHookFormValue> = ({ form }) => {
     if (template === "2") {
         TemplateComp = Template2;
     } else if (template === "3") {
-        TemplateComp = Template1;
+        TemplateComp = Template3;
     }
 
     return (
@@ -45,7 +46,7 @@ export const GenerateReceipt: FC<ReactHookFormValue> = ({ form }) => {
                 <p className="mt-4 text-sm text-gray-500">
                     There is no PDF file available to download directly. Simply print the page as PDF to save it. For more information on how to print as PDF, please <Button variant={'link'} className="px-1" asChild><Link href="https://www.howtogeek.com/235134/how-to-print-to-pdf-on-any-computer-smartphone-or-tablet/">refer here</Link></Button>.
                     <br />
-                    If you&apos;re using this tool on a mobile device, you may not see the previwew correctly however the print should workd fine.
+                    If you&apos;re using this tool on a mobile device, you may not see the preview correctly however the print should workd fine.
                 </p>
             </section>
 

@@ -31,6 +31,7 @@ export const formSchema = z.object({
   signatureImage: z.string().url(),
   signatureImageSrc: z.string().url(),
   disclaimer: z.string(),
+  needRevenueStamp: z.boolean(),
 });
 
 export const getSignatureImageUrl = (nameStr: string, font: NextFont, textColor = '#2c2c2c') => {

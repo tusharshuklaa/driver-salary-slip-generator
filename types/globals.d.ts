@@ -6,17 +6,17 @@ export type ReactHookFormValue = {
 
 export type TemplateProps = {
     heading?: string;
-    salaryAmount?: number;
-    currency?: string;
-    driverSalutation?: string;
-    driverName?: string;
-    salaryMonth?: string;
-    employeeSalutation?: string;
-    employeeName?: string;
-    paymentDate?: Date;
-    vehicleNumber?: string;
+    salaryAmount: number;
+    currency: string;
+    driverSalutation: string;
+    driverName: string;
+    salaryMonth: string;
+    employeeSalutation: string;
+    employeeName: string;
+    paymentDate: Date;
+    vehicleNumber: string;
     signatureImage?: string;
-    signatureImageSrc?: string;
+    signatureImageSrc: string;
     disclaimer?: string;
     font: NextFont;
     needRevenueStamp: boolean;

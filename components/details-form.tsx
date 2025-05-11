@@ -65,8 +65,6 @@ export const DetailsForm: FC<ReactHookFormValue> = ({ form }) => {
         }
     };
 
-    const defaultSalaryMonth = format(new Date(), "MMMM");
-
     return (
         <Form {...form}>
             <form onSubmit={onSubmit} className="space-y-8">
@@ -260,7 +258,7 @@ export const DetailsForm: FC<ReactHookFormValue> = ({ form }) => {
                             render={({ field }) => (
                                 <FormItem className="w-full">
                                     <FormLabel>Salary Month</FormLabel>
-                                    <Select onValueChange={field.onChange} defaultValue={defaultSalaryMonth}>
+                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <FormControl>
                                             <SelectTrigger>
                                                 <SelectValue placeholder="Month" />

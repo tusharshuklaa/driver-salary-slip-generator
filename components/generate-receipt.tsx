@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Alex_Brush } from 'next/font/google';
 import Link from 'next/link';
 import { ReactHookFormValue } from '@/types/globals';
@@ -10,6 +10,8 @@ import { Template3 } from '@/components/template3';
 import { DetailsForm } from '@/components/details-form';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Button } from '@/components/ui/button';
+import { SaveConfirmationDialog } from '@/components/save-confirmation-dialog';
+import { saveFormToLocalStorage } from '@/lib/utils';
 
 const signatureFont = Alex_Brush({
     weight: '400',
@@ -19,6 +21,7 @@ const signatureFont = Alex_Brush({
 export const GenerateReceipt: FC<ReactHookFormValue> = ({ form }) => {
     const formValues = form.watch();
     const template = formValues.template;
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     let TemplateComp = Template1;
 
@@ -27,6 +30,20 @@ export const GenerateReceipt: FC<ReactHookFormValue> = ({ form }) => {
     } else if (template === "3") {
         TemplateComp = Template3;
     }
+
+    const handleSaveAndPrint = async () => {
+        const result = await saveFormToLocalStorage(form.getValues());
+        if (result.imageSkipped) {
+            window.alert(
+                "Your signature image is too large to save (over 200 KB). The rest of your form data has been saved, but the signature will not be restored next time."
+            );
+        } else if (result.quotaExceeded) {
+            window.alert(
+                "Could not save your form data — your browser's storage is full. Please clear some site data and try again."
+            );
+        }
+        // window.print() is called by the dialog after it closes
+    };
 
     return (
         <div className="flex flex-col lg:flex-row gap-8 overflow-hidden min-h-max lg:max-h-[80vh] pt-4">
@@ -38,7 +55,7 @@ export const GenerateReceipt: FC<ReactHookFormValue> = ({ form }) => {
                         Reset Form
                     </Button>
 
-                    <Button onClick={() => window.print()}>
+                    <Button onClick={() => setIsDialogOpen(true)}>
                         Print PDF
                     </Button>
                 </div>
@@ -58,6 +75,13 @@ export const GenerateReceipt: FC<ReactHookFormValue> = ({ form }) => {
                     </section>
                 </AspectRatio>
             </div>
+
+            <SaveConfirmationDialog
+                isOpen={isDialogOpen}
+                onOpenChange={setIsDialogOpen}
+                onSaveAndPrint={handleSaveAndPrint}
+                onJustPrint={() => window.print()}
+            />
         </div>
     );
 };

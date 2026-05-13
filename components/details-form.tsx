@@ -3,7 +3,8 @@
 import { FC, FormEvent, useState } from "react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-import { CalendarIcon } from "lucide-react";
+import Image from "next/image";
+import { CalendarIcon, XCircle } from "lucide-react";
 import {
     Form,
     FormControl,
@@ -55,6 +56,8 @@ export const DetailsForm: FC<ReactHookFormValue> = ({ form }) => {
         return;
     };
 
+    const signatureImageSrc = form.watch('signatureImageSrc');
+
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
 
@@ -63,6 +66,11 @@ export const DetailsForm: FC<ReactHookFormValue> = ({ form }) => {
             // Update the form state with the image URL
             form.setValue('signatureImageSrc', imageUrl);
         }
+    };
+
+    const handleRemoveSignature = () => {
+        form.setValue('signatureImage', '');
+        form.setValue('signatureImageSrc', '');
     };
 
     return (
@@ -320,6 +328,28 @@ export const DetailsForm: FC<ReactHookFormValue> = ({ form }) => {
                                             }}
                                         />
                                     </FormControl>
+                                    {signatureImageSrc && (
+                                        <div className="flex items-center gap-3 mt-2">
+                                            <Image
+                                                src={signatureImageSrc}
+                                                alt="Signature preview"
+                                                width={160}
+                                                height={40}
+                                                unoptimized
+                                                className="h-10 w-auto rounded border border-border object-contain bg-white px-1"
+                                            />
+                                            <Button
+                                                type="button"
+                                                variant="ghost"
+                                                size="sm"
+                                                className="text-destructive hover:text-destructive gap-1 px-2"
+                                                onClick={handleRemoveSignature}
+                                            >
+                                                <XCircle className="h-4 w-4" />
+                                                Remove
+                                            </Button>
+                                        </div>
+                                    )}
                                     <FormMessage />
                                 </FormItem>
                             )}

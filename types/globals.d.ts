@@ -20,4 +20,8 @@ export type TemplateProps = {
     disclaimer?: string;
     font: NextFont;
     needRevenueStamp: boolean;
+    signatureOffsetX?: number;
+    signatureOffsetY?: number;
+    signatureRotation?: number;
+    signatureScale?: number;
 };

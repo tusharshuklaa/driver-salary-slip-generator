@@ -2,13 +2,14 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import { z } from "zod";
 import Link from "next/link";
 import { format } from "date-fns";
 import { GenerateReceipt } from "@/components/generate-receipt";
 import { SelectTemplate } from "@/components/select-template";
 import { Button } from "@/components/ui/button";
-import { formSchema } from "@/lib/utils";
+import { formSchema, loadFormFromLocalStorage, DEFAULT_DISCLAIMER } from "@/lib/utils";
 
 export default function Home() {
   const currentYear = new Date().getFullYear();
@@ -31,10 +32,22 @@ export default function Home() {
       salaryMonth: defaultSalaryMonth,
       signatureImage: "",
       signatureImageSrc: "",
-      disclaimer: "I also declare that the driver is exclusively utilized for official purpose only. Please reimburse the above amount. I further declare that what is stated above is correct and true.",
+      disclaimer: DEFAULT_DISCLAIMER,
       needRevenueStamp: true,
+      signatureOffsetX: 0,
+      signatureOffsetY: 0,
+      signatureRotation: 0,
+      signatureScale: 1,
     },
   });
+
+  useEffect(() => {
+    const saved = loadFormFromLocalStorage();
+    if (saved) {
+      form.reset({ ...form.getValues(), ...saved });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <main className="max-w-7xl mx-auto py-12 px-4 space-y-8 print:space-y-0 print:py-0 print:px-0">
@@ -48,7 +61,7 @@ export default function Home() {
         <p className="mb-8">
           See an issue in the app? <Button variant={'link'} className="tracking-wide px-1" asChild><Link href="https://github.com/tusharshuklaa/driver-salary-slip-generator/issues/new?assignees=tusharshuklaa&labels=bug&projects=&template=bug_report.md&title=">Let me know!</Link></Button> Have a feature request? Feel free to <Button variant={'link'} className="tracking-wide px-1" asChild><Link href="https://github.com/tusharshuklaa/driver-salary-slip-generator/issues/new?assignees=tusharshuklaa&labels=enhancement&projects=&template=feature_request.md&title=">suggest</Link></Button>.
         </p>
-        <p>Created by <Button variant={'link'} className="tracking-wide px-1" asChild><Link href="https://github.com/tusharshuklaa">Tushar Shukla</Link></Button></p>
+        <p>Created by <Button variant={'link'} className="tracking-wide px-1" asChild><Link href="https://tusharshukla.dev">Tushar Shukla</Link></Button></p>
         <p className="mb-4"><a href="https://www.flaticon.com/free-icons/receipt" title="receipt icons">Receipt icon created by Freepik - Flaticon</a></p>
         <p>&copy; {currentYear} All Rights Reserved</p>
       </footer>

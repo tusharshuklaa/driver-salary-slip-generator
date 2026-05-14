@@ -33,6 +33,10 @@ export const formSchema = z.object({
   signatureImageSrc: z.string().url(),
   disclaimer: z.string(),
   needRevenueStamp: z.boolean(),
+  signatureOffsetX: z.number().min(-100).max(100),
+  signatureOffsetY: z.number().min(-100).max(100),
+  signatureRotation: z.number().min(-45).max(45),
+  signatureScale: z.number().min(0.5).max(2),
 });
 
 export const getSignatureImageUrl = (nameStr: string, font: NextFont, textColor = '#2c2c2c') => {
@@ -115,6 +119,10 @@ export type StoredFormData = {
   /** null means the default disclaimer was in use — don't store it verbatim. */
   disclaimer: string | null;
   needRevenueStamp: boolean;
+  signatureOffsetX: number;
+  signatureOffsetY: number;
+  signatureRotation: number;
+  signatureScale: number;
 };
 
 export type SaveResult = {
@@ -178,6 +186,10 @@ export const saveFormToLocalStorage = async (
     signatureImageData,
     disclaimer: values.disclaimer === DEFAULT_DISCLAIMER ? null : values.disclaimer,
     needRevenueStamp: values.needRevenueStamp,
+    signatureOffsetX: values.signatureOffsetX,
+    signatureOffsetY: values.signatureOffsetY,
+    signatureRotation: values.signatureRotation,
+    signatureScale: values.signatureScale,
   };
 
   try {
@@ -227,6 +239,10 @@ export const loadFormFromLocalStorage = (): Partial<z.infer<typeof formSchema>> 
       signatureImageSrc: stored.signatureImageData,
       disclaimer: stored.disclaimer ?? DEFAULT_DISCLAIMER,
       needRevenueStamp: stored.needRevenueStamp,
+      signatureOffsetX: stored.signatureOffsetX ?? 0,
+      signatureOffsetY: stored.signatureOffsetY ?? 0,
+      signatureRotation: stored.signatureRotation ?? 0,
+      signatureScale: stored.signatureScale ?? 1,
     };
   } catch {
     return null;

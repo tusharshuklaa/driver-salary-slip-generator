@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   applicationName: 'driver-salary-slip-generator',
   title: "Generate driver salary slip",
   description: "Generate driver salary slip using this simple and FREE tool.",
-  authors: [{ name: "Tushar Shukla", url: "https://github.com/tusharshuklaa" }],
+  authors: [{ name: "Tushar Shukla", url: "https://tusharshukla.dev" }],
   keywords: ["driver", "salary", "slip", "generator", "receipt", "template", "pdf", "free", "tool"],
   robots: {
     index: true,

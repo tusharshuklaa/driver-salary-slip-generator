@@ -18,6 +18,10 @@ export const Template2: FC<TemplateProps> = ({
     disclaimer,
     font,
     needRevenueStamp,
+    signatureOffsetX = 0,
+    signatureOffsetY = 0,
+    signatureRotation = 0,
+    signatureScale = 1,
 }) => {
     const { payDate, currencySymbol, signatureImage } = useTemplateValues(paymentDate, currency, signatureImageSrc, driverName, font);
 
@@ -103,7 +107,7 @@ export const Template2: FC<TemplateProps> = ({
 
                         {
                             signatureImage && (
-                                <Image src={signatureImage} alt="driver signature" width={60} height={70} className="w-auto h-auto max-h-[100px]" />
+                                <Image src={signatureImage} alt="driver signature" width={60} height={70} className="w-auto h-auto mix-blend-multiply" style={{ transform: `translateX(${signatureOffsetX}px) translateY(${signatureOffsetY}px) rotate(${signatureRotation}deg) scale(${signatureScale})` }} />
                             )
                         }
                     </div>

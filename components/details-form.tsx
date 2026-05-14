@@ -57,6 +57,12 @@ export const DetailsForm: FC<ReactHookFormValue> = ({ form }) => {
     };
 
     const signatureImageSrc = form.watch('signatureImageSrc');
+    const driverName = form.watch('driverName');
+    const signatureOffsetX = form.watch('signatureOffsetX');
+    const signatureOffsetY = form.watch('signatureOffsetY');
+    const signatureRotation = form.watch('signatureRotation');
+    const signatureScale = form.watch('signatureScale');
+    const hasSignature = !!(signatureImageSrc || driverName);
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -355,6 +361,83 @@ export const DetailsForm: FC<ReactHookFormValue> = ({ form }) => {
                             )}
                         />
                     </FormRow>
+
+                    {hasSignature && (
+                        <details className="mt-2">
+                            <summary className="cursor-pointer text-sm font-medium text-muted-foreground select-none hover:text-foreground transition-colors">
+                                Adjust signature position
+                            </summary>
+
+                            <div className="mt-3 space-y-3 pl-1">
+                                <div className="flex items-center gap-3">
+                                    <label className="w-28 shrink-0 text-sm">Horizontal</label>
+                                    <input
+                                        type="range"
+                                        min={-100}
+                                        max={100}
+                                        step={1}
+                                        className="flex-1 accent-primary"
+                                        {...form.register('signatureOffsetX', { valueAsNumber: true })}
+                                    />
+                                    <span className="w-14 text-right text-sm tabular-nums text-muted-foreground">{signatureOffsetX}px</span>
+                                </div>
+
+                                <div className="flex items-center gap-3">
+                                    <label className="w-28 shrink-0 text-sm">Vertical</label>
+                                    <input
+                                        type="range"
+                                        min={-100}
+                                        max={100}
+                                        step={1}
+                                        className="flex-1 accent-primary"
+                                        {...form.register('signatureOffsetY', { valueAsNumber: true })}
+                                    />
+                                    <span className="w-14 text-right text-sm tabular-nums text-muted-foreground">{signatureOffsetY}px</span>
+                                </div>
+
+                                <div className="flex items-center gap-3">
+                                    <label className="w-28 shrink-0 text-sm">Rotation</label>
+                                    <input
+                                        type="range"
+                                        min={-45}
+                                        max={45}
+                                        step={1}
+                                        className="flex-1 accent-primary"
+                                        {...form.register('signatureRotation', { valueAsNumber: true })}
+                                    />
+                                    <span className="w-14 text-right text-sm tabular-nums text-muted-foreground">{signatureRotation}°</span>
+                                </div>
+
+                                <div className="flex items-center gap-3">
+                                    <label className="w-28 shrink-0 text-sm">Scale</label>
+                                    <input
+                                        type="range"
+                                        min={0.5}
+                                        max={2}
+                                        step={0.05}
+                                        className="flex-1 accent-primary"
+                                        {...form.register('signatureScale', { valueAsNumber: true })}
+                                    />
+                                    <span className="w-14 text-right text-sm tabular-nums text-muted-foreground">{Math.round(signatureScale * 100)}%</span>
+                                </div>
+
+                                <Button
+                                    type="button"
+                                    variant="ghost"
+                                    size="sm"
+                                    className="px-2 text-muted-foreground"
+                                    onClick={() => {
+                                        form.setValue('signatureOffsetX', 0);
+                                        form.setValue('signatureOffsetY', 0);
+                                        form.setValue('signatureRotation', 0);
+                                        form.setValue('signatureScale', 1);
+                                    }}
+                                >
+                                    Reset position
+                                </Button>
+                            </div>
+                        </details>
+                    )}
                 </FormContainer>
 
                 <FormContainer heading="Additional Info">
